@@ -8,9 +8,13 @@ class ProductTable extends Component {
     let lastCategory = null;
 
     // Data - array of products
-    const products = this.props.products;
+    const { products, filterText, inStockOnly } = this.props;
 
     products.forEach((product) => {
+      if (product.name.indexOf(filterText) === -1) return;
+
+      if (inStockOnly && !product.stocked) return;
+
       if (product.category !== lastCategory) {
         lastCategory = product.category;
 
