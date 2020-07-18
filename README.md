@@ -1,4 +1,4 @@
-# PruductList
+# ProductList
 
 ## Author: Sara Gray
 

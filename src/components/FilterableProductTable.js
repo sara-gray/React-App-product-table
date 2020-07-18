@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import SearchBar from './SearchBar';
 import ProductTable from './ProductTable';
 
-export class FilterableProductTable extends Component {
+class FilterableProductTable extends Component {
   render() {
+    const products = this.props.products;
+
     return (
-      <div>
-        <h1>FilterableProductTable</h1>
+      <div className='table'>
         <SearchBar />
-        <ProductTable />
+        <ProductTable products={products} />
       </div>
     );
   }
