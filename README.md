@@ -16,7 +16,7 @@ I wanted to take the example given on the [Thinking in React](#https://reactjs.o
             {category: "Electronics", price: "$199.99", stocked: true, name: "Nexus 7"}
         ];
 
-[mock up](#/thinking-in-react-components.png)
+![mock up](assets/images/thinking-in-react-components.png)
 
 We have five components in our app.
 
