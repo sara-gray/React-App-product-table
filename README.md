@@ -1,68 +1,48 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# PruductList
 
-## Available Scripts
+## Author: Sara Gray
 
-In the project directory, you can run:
+---
 
-### `npm start`
+I wanted to take the example given on the [Thinking in React](#https://reactjs.org/docs/thinking-in-react.html) page and build it by myself using the model outlined
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    [
+        {category: "Sporting Goods", price: "$49.99", stocked: true, name: "Football"},
+        {category: "Sporting Goods", price: "$9.99", stocked: true, name: "Baseball"},
+        {category: "Sporting Goods", price: "$29.99", stocked: false, name: "Basketball"},
+        {category: "Electronics", price: "$99.99", stocked: true, name: "iPod Touch"},
+        {category: "Electronics", price: "$399.99", stocked: false, name: "iPhone 5"},
+        {category: "Electronics", price: "$199.99", stocked: true, name: "Nexus 7"}
+    ];
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+(#thinking-in-react-components.png)
 
-### `npm test`
+We have five components in our app. We’ve italicized the data each component represents.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- FilterableProductTable (orange): contains the entirety of the example
+- SearchBar (blue): receives all user input
+- ProductTable (green): displays and filters the data collection based on user input
+- ProductCategoryRow (turquoise): displays a heading for each category
+- ProductRow (red): displays a row for each product
 
-### `npm run build`
+Components that appear within another component in the mock should appear as a child in the hierarchy:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- FilterableProductTable
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+  - SearchBar
+  - ProductTable
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    - ProductCategoryRow
+    - ProductRow
 
-### `npm run eject`
+# Build A Static Version in React
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The easiest way is to build a version that takes your data model and renders the UI but has no interactivity. It’s best to decouple these processes because building a static version requires a lot of typing and no thinking, and adding interactivity requires a lot of thinking and not a lot of typing. We’ll see why.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Build a static version of your app that renders your data model and pass data using props. Don’t use state at all to build this static version. State is reserved only for interactivity, that is, data that changes over time. Since this is a static version of the app, you don’t need it.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You can build top-down or bottom-up.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+In simpler examples, it’s usually easier to go top-down, and on larger projects, it’s easier to go bottom-up and write tests as you build.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The components will only have render() methods since this is a static version of your app. The component at the top of the hierarchy (FilterableProductTable) will take your data model as a prop. If you make a change to your underlying data model and call ReactDOM.render() again, the UI will be updated. You can see how your UI is updated and where to make changes. React’s one-way data flow (also called one-way binding) keeps everything modular and fast.
