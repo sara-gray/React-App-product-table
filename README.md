@@ -16,9 +16,9 @@ I wanted to take the example given on the [Thinking in React](#https://reactjs.o
             {category: "Electronics", price: "$199.99", stocked: true, name: "Nexus 7"}
         ];
 
-(#thinking-in-react-components.png)
+[mock up](#/thinking-in-react-components.png)
 
-We have five components in our app. We’ve italicized the data each component represents.
+We have five components in our app.
 
 - FilterableProductTable (orange): contains the entirety of the example
 - SearchBar (blue): receives all user input
@@ -36,6 +36,7 @@ Components that appear within another component in the mock should appear as a c
     - ProductCategoryRow
     - ProductRow
 
+
 # Build A Static Version in React
 
 The easiest way is to build a version that takes your data model and renders the UI but has no interactivity. It’s best to decouple these processes because building a static version requires a lot of typing and no thinking, and adding interactivity requires a lot of thinking and not a lot of typing. We’ll see why.
@@ -47,6 +48,7 @@ You can build top-down or bottom-up.
 In simpler examples, it’s usually easier to go top-down, and on larger projects, it’s easier to go bottom-up and write tests as you build.
 
 The components will only have render() methods since this is a static version of your app. The component at the top of the hierarchy (FilterableProductTable) will take your data model as a prop. If you make a change to your underlying data model and call ReactDOM.render() again, the UI will be updated. You can see how your UI is updated and where to make changes. React’s one-way data flow (also called one-way binding) keeps everything modular and fast.
+
 
 # Identify The Minimal (but complete) Representation Of UI State
 
@@ -78,6 +80,7 @@ So finally, our state is:
 - The search text the user has entered
 - The value of the checkbox
 
+
 # Identify Where Your State Should Live
 
 OK, so we’ve identified what the minimal set of app state is. Next, we need to identify which component mutates, or owns, this state.
@@ -101,6 +104,7 @@ It conceptually makes sense for the filter text and checked value to live in Fil
 Cool, so we’ve decided that our state lives in FilterableProductTable. First, add an instance property this.state = {filterText: '', inStockOnly: false} to FilterableProductTable’s constructor to reflect the initial state of your application. Then, pass filterText and inStockOnly to ProductTable and SearchBar as a prop. Finally, use these props to filter the rows in ProductTable and set the values of the form fields in SearchBar.
 
 You can start seeing how your application will behave: set filterText to "ball" and refresh your app. You’ll see that the data table is updated correctly.
+
 
 # Add Inverse Data Flow
 
